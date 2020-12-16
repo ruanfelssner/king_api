@@ -7,10 +7,10 @@ const permit = new Bearer();
 
 module.exports = {
     login(req, res, next){
-        const { username, password } = req.body;
+        const { email, password } = req.body;
         User.findOne({
             where: {
-                username: username
+                email: email
             }
         }).then((user) => {
             if(!user) return res.status(401).json({error: 'Usuário não existe.'})
@@ -18,7 +18,7 @@ module.exports = {
                 return res.status(401).json({error: 'Senha inválida'})
             }
 
-            let jwtPayload = { username: user.username, email: user.email }
+            let jwtPayload = { email: user.email }
             let token = jwt.sign(jwtPayload, process.env.JWT_SECRET);
             return res.status(200).json({ token })
         })
@@ -34,7 +34,7 @@ module.exports = {
                 permit.fail(res)
                 return res.status(401).json({error: 'Token inválido!'})
             }
-            req.username = decoded.username;
+            req.email = decoded.email;
             next();
         })
     },
@@ -46,7 +46,8 @@ module.exports = {
     },
     add(req, res, next){
         User.create({
-            username: req.username,
+            name: req.name,
+            email: req.email,
             password: bcrypt.hashSync(req.password, 10)
         })
         .then(users => {
