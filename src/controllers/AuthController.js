@@ -43,21 +43,20 @@ module.exports = {
         .then(users => {
             return res.status(200).json({users})
         })
-        .catch(erro => {
-            return res.status(401).json({error: erro})
-        })
     },
     add(req, res, next){
+        const { name, email, password } = req.body;
         User.create({
-            name: req.name,
-            email: req.email,
-            password: bcrypt.hashSync(req.password, 10)
+            name: name,
+            email: email,
+            password: bcrypt.hashSync(password, 10)
         })
-        .then(users => {
-            return res.status(200).json({users})
+        .then(async (usuario) => {
+            let token = await jwt.sign({ email: usuario.email }, process.env.JWT_SECRET)
+            return res.status(200).json({usuario, token})
         })
         .catch(erro => {
-            return res.status(401).json({error: erro})
+            return res.status(401).json({error: 'Erro ao cadastrar'})
         })
     }
 }
