@@ -12,15 +12,15 @@ module.exports = {
             where: {
                 email: email
             }
-        }).then((user) => {
-            if(!user) return res.status(401).json({error: 'Usuário não existe.'})
-            if(!bcrypt.compareSync(password, user.password)){
+        }).then((usuario) => {
+            if(!usuario) return res.status(401).json({error: 'Usuário não existe.'})
+            if(!bcrypt.compareSync(password, usuario.password)){
                 return res.status(401).json({error: 'Senha inválida'})
             }
 
-            let jwtPayload = { email: user.email }
+            let jwtPayload = { email: usuario.email }
             let token = jwt.sign(jwtPayload, process.env.JWT_SECRET);
-            return res.status(200).json({ token })
+            return res.status(200).json({ usuario, token })
         })
     },
     auth(req, res, next){
