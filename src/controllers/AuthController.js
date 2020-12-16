@@ -43,6 +43,9 @@ module.exports = {
         .then(users => {
             return res.status(200).json({users})
         })
+        .catch(erro => {
+            return res.status(401).json({error: erro})
+        })
     },
     add(req, res, next){
         User.create({
@@ -52,6 +55,9 @@ module.exports = {
         })
         .then(users => {
             return res.status(200).json({users})
+        })
+        .catch(erro => {
+            return res.status(401).json({error: erro})
         })
     }
 }
