@@ -37,5 +37,11 @@ module.exports = {
             req.username = decoded.username;
             next();
         })
+    },
+    all(req, res, next){
+        User.findAll()
+        .then(users => {
+            return res.status(200).json({users})
+        })
     }
 }
