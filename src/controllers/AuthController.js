@@ -43,5 +43,14 @@ module.exports = {
         .then(users => {
             return res.status(200).json({users})
         })
+    },
+    add(req, res, next){
+        User.create({
+            username: req.username,
+            password: bcrypt.hashSync(req.password, 10)
+        })
+        .then(users => {
+            return res.status(200).json({users})
+        })
     }
 }
