@@ -6,6 +6,20 @@ const User = require('../database/models/User');
 const permit = new Bearer();
 
 module.exports = {
+    token(req, res, next){
+        const token = req.body.token
+        if(!token){
+            return res.status(401).json({error: 'Favor informar um token!'})
+        }
+        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+            if(err){
+                return res.status(401).json({error: 'Token inválido!'})
+            }else{
+                // correto é verificar se ja venceu o token
+                return res.status(200).json({decoded})
+            }
+        })
+    },
     login(req, res, next){
         const { email, password } = req.body;
         User.findOne({

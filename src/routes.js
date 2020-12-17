@@ -8,6 +8,7 @@ router.post("/cars", AuthController.auth, CarsController.create);
 
 router.post("/login", AuthController.login);
 router.post("/login/Add", AuthController.add);
+router.post("/login/Token", AuthController.token);
 router.get("/login/All", AuthController.auth, AuthController.all);
 
 module.exports = router;
