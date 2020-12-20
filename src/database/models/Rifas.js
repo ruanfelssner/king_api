@@ -18,6 +18,7 @@ const Rifa = sequelize.define("rifas", {
     whatsapp: DataTypes.STRING,    
     tipoPagamento: DataTypes.INTEGER,  
     tipoRifa: DataTypes.INTEGER,  
+    qtdCotasDisponiveis: DataTypes.INTEGER,   
     qtdCotas: DataTypes.INTEGER,   
     valorCotas: DataTypes.INTEGER,   
     referenciaSorteio: DataTypes.INTEGER,   
@@ -30,6 +31,7 @@ const Rifa = sequelize.define("rifas", {
     motor: DataTypes.STRING,       
     anoModelo: DataTypes.STRING,       
     cor: DataTypes.STRING,       
+    avatar: DataTypes.STRING,       
     descricao: DataTypes.TEXT,
     previsaoSorteio: {
         type: DataTypes.DATE,
