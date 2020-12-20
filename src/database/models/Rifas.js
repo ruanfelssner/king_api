@@ -31,7 +31,7 @@ const Rifa = sequelize.define("rifas", {
     motor: DataTypes.STRING,       
     anoModelo: DataTypes.STRING,       
     cor: DataTypes.STRING,       
-    avatar: DataTypes.STRING,       
+    avatar: DataTypes.TEXT,       
     descricao: DataTypes.TEXT,
     previsaoSorteio: {
         type: DataTypes.DATE,
