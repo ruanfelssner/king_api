@@ -2,7 +2,7 @@
 const Rifa = require('../database/models/Rifas');
 module.exports = {
     rifas(req, res, next) {        
-        Rifa.findAll()
+        Rifa.findAll({ limit: 10, order: [['updatedAt', 'DESC']] })
         .then(rifas => {
             return res.status(200).json({rifas})
         })
