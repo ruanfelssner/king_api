@@ -15,5 +15,6 @@ router.get("/login/All", AuthController.auth, AuthController.all);
 
 router.get("/rifas", AuthController.auth, RifasController.rifas);
 router.post("/rifas/add", AuthController.auth, RifasController.add);
+router.post("/rifas/del", AuthController.auth, RifasController.add);
 
 module.exports = router;
